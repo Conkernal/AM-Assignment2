@@ -202,6 +202,5 @@ D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\bin\Mic
 D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\bin\Microsoft.Owin.Security.Google.xml
 D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\obj\Debug\AM_Assignment2.csprojResolveAssemblyReference.cache
 D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\obj\Debug\AM_Assignment2.dll
 D:\Year 3\Advanced Multimedia\Assignment_2\AM-Assignment2\AM_Assignment2\obj\Debug\AM_Assignment2.pdb
