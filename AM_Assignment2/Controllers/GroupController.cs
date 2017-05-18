@@ -11,6 +11,7 @@ using AM_Assignment2.Models;
 
 namespace AM_Assignment2.Controllers
 {
+    // Create, Read, Update and Delete functionality for Groups
     public class GroupController : Controller
     {
         private App_Database db = new App_Database();
