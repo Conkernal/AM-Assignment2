@@ -21,16 +21,6 @@ namespace AM_Assignment2.DAL
             };
             statuses.ForEach(s => context.Status.Add(s));
             context.SaveChanges();
-
-            // Add user types to user type table
-            var user_types = new List<UserType>
-            {
-                new UserType {UserTypeID="L", UserTypeName="Learner"},
-                new UserType {UserTypeID="I", UserTypeName="Instructor" },
-                new UserType {UserTypeID="A", UserTypeName="Administrator" }
-            };
-            user_types.ForEach(s => context.UserType.Add(s));
-            context.SaveChanges();
         }
     }
 }
