@@ -125,6 +125,7 @@ namespace AM_Assignment2
                     context.Get<ApplicationDbContext>()));
 
             return manager;
+
         }
     }
 }

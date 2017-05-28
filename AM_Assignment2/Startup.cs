@@ -45,6 +45,7 @@ namespace AM_Assignment2
                 new IdentityRole {Id = "L", Name = "Learner"},
                 new IdentityRole {Id = "I", Name = "Instructor"},
                 new IdentityRole {Id = "A", Name = "Administrator"}
+
             };
 
             // Insert roles to database

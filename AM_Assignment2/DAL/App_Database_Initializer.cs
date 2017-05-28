@@ -21,6 +21,7 @@ namespace AM_Assignment2.DAL
             };
             statuses.ForEach(s => context.Status.Add(s));
             context.SaveChanges();
+
         }
     }
 }

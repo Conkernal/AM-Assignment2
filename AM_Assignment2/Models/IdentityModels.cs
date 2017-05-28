@@ -28,6 +28,7 @@ namespace AM_Assignment2.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+
         }
     }
 }

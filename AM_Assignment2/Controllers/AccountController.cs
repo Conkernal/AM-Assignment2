@@ -19,6 +19,7 @@ namespace AM_Assignment2.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
+
         public ApplicationRoleManager roleManager
         {
             get
