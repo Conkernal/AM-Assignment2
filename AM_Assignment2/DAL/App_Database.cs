@@ -12,7 +12,6 @@ namespace AM_Assignment2.DAL
         }
 
         public DbSet<Status> Status { get; set; }
-        public DbSet<UserType> UserType { get; set; }
 
         public DbSet<Group> Group { get; set; } 
 
