@@ -6,7 +6,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using Microsoft.Owin.Security.Cookies;
 using System.Linq;
-using AM_Assignment2.DAL;
 
 [assembly: OwinStartupAttribute(typeof(AM_Assignment2.Startup))]
 namespace AM_Assignment2
@@ -30,9 +29,6 @@ namespace AM_Assignment2
             });
 
             seedIdentityDatabase();
-
-            App_Database_Initializer app_database = new App_Database_Initializer();
-            app_database.InitializeDatabase();
         }
 
         protected void seedIdentityDatabase()
