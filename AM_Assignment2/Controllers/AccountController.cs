@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using AM_Assignment2.Models;
+using AM_Assignment2.DAL;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AM_Assignment2.Controllers
 {
@@ -170,7 +172,21 @@ namespace AM_Assignment2.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    App_Database app_database = new App_Database(); // App_database object to use the application database for adding a user
+
+                    UserManager<ApplicationUser> userManager;
+                    userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+
+                    var found_user = userManager.FindByEmail(model.Email); // Find user in Identity database by email
+
+                    // Create user record for application database
+                    var application_user = new User { UserID = found_user.Id, UserInterface = "Light" };
+                    app_database.User.Add(application_user);
+
+                    app_database.SaveChanges(); // COMMIT changes to database
+
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
