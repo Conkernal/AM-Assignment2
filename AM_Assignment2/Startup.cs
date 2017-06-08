@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using Microsoft.Owin.Security.Cookies;
 using System.Linq;
+using AM_Assignment2.DAL;
 
 [assembly: OwinStartupAttribute(typeof(AM_Assignment2.Startup))]
 namespace AM_Assignment2
@@ -29,6 +30,9 @@ namespace AM_Assignment2
             });
 
             seedIdentityDatabase();
+
+            App_Database_Initializer app_database = new App_Database_Initializer();
+            app_database.InitializeDatabase();
         }
 
         protected void seedIdentityDatabase()
@@ -52,7 +56,7 @@ namespace AM_Assignment2
             // Insert roles to database
             foreach (IdentityRole role in roles)
             {
-                if(roleManager.RoleExists(role.Name) == false) // If role doesn't already exist, add role to database
+                if (roleManager.RoleExists(role.Name) == false) // If role doesn't already exist, add role to database
                 {
                     var result = roleManager.Create(role);
                 }
