@@ -106,4 +106,26 @@ namespace AM_Assignment2
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
+
+    // Role manager
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(IRoleStore<IdentityRole, string> roleStore)
+            : base(roleStore)
+        {
+
+        }
+
+        public static ApplicationRoleManager Create(
+            IdentityFactoryOptions<ApplicationRoleManager> options,
+            IOwinContext context)
+        {
+            var manager = new ApplicationRoleManager(
+                new RoleStore<IdentityRole>(
+                    context.Get<ApplicationDbContext>()));
+
+            return manager;
+
+        }
+    }
 }
