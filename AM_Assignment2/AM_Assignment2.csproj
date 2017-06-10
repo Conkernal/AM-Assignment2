@@ -171,6 +171,7 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="DAL\App_Database.cs" />
     <Compile Include="DAL\App_Database_Initializer.cs" />
     <Compile Include="Global.asax.cs">
