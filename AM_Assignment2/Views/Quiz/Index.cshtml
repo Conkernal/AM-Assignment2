@@ -1,7 +1,46 @@
-﻿
+﻿@using System.Web.Mvc.Html;
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Quiz";
 }
 
-<h2>Index</h2>
+<h2>It's time for a quiz!</h2>
+<h3>You should only be here if you have completed the activities as the questions will be focused around them.</h3>
+<br />
+
+
+<h1>Quiz</h1>
+
+<h4>Question One: </h4>
+
+@using (Html.BeginForm("Results", "Quiz"))
+{
+
+	<p>Is "Form" a semantic or non-semantic html5 element?</p>
+	<p>
+		@Html.Label("semantic")
+		@Html.CheckBox("semantic", false)
+		<br />
+		@Html.Label("non-semantic")
+		@Html.CheckBox("nonsemantic", false)
+	</p>
+	<h4>Question Two: </h4>
+
+	<p>Which of the following is a non-semantic html5 element? (SELECT ONE)</p>
+	<p>
+
+		@Html.Label("table")
+		@Html.CheckBox("table", false)
+		<br />
+		@Html.Label("span")
+		@Html.CheckBox("span", false)
+		<br />
+		@Html.Label("article")
+		@Html.CheckBox("article", false)
+	</p>
+
+	<br />
+	<br />
+	<input type="submit" value="Submit" />
+
+}
 
