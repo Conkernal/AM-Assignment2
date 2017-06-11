@@ -181,7 +181,7 @@ namespace AM_Assignment2.Controllers
                     var found_user = userManager.FindByEmail(model.Email); // Find user in Identity database by email
 
                     // Create user record for application database
-                    var application_user = new User { UserID = found_user.Id, UserInterface = "Light" };
+                    var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate=DateTime.Today };
                     app_database.User.Add(application_user);
 
                     app_database.SaveChanges(); // COMMIT changes to database
