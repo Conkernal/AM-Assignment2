@@ -21,5 +21,7 @@ namespace AM_Assignment2.Models
         [Required]
         [DataType(DataType.Date)]
         public DateTime UserCreationDate { get; set; }
+
+        public DateTime? LastLoginTime { get; set; } // The ? allows this field to be nullable
     }
 }

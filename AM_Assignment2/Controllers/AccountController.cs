@@ -95,6 +95,11 @@ namespace AM_Assignment2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    ApplicationUser identity_user = UserManager.FindByEmail(model.Email);
+                    App_Database app_database = new App_Database(); // App_database object to use the application database for adding a user
+                    User user = app_database.User.Find(identity_user.Id);
+                    user.LastLoginTime = DateTime.Now;
+                    app_database.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
