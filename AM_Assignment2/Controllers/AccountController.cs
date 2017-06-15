@@ -14,7 +14,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace AM_Assignment2.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -157,7 +156,7 @@ namespace AM_Assignment2.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")] // Secure to administrators only
         public ActionResult Register()
         {
             return View();
@@ -166,7 +165,7 @@ namespace AM_Assignment2.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator")] // Secure to administrators only
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {

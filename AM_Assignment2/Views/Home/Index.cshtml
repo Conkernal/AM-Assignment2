@@ -1,6 +1,16 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        // Add administrator view
+    }
+    else
+    {
+        // Non-administrator view
+    }
+}
 
 <div class="jumbotron">
     <h1>Learning Outcome</h1>
