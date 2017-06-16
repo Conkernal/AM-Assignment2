@@ -4,7 +4,8 @@
 @{
     if (HttpContext.Current.User.IsInRole("Administrator"))
     {
-        // Add administrator view
+        <li><a href="Account/Register">Create user</a></li>
+        <li><a href="Group/Index">Group management</a></li>
     }
     else
     {
