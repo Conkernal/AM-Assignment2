@@ -161,7 +161,6 @@ namespace AM_Assignment2.Controllers
         public ActionResult Register(GroupViewModel groupList)
         {
             GroupQuery groupQuery = new GroupQuery();
-            groupList.GroupList = groupQuery.GetAllGroups();
             ViewData["GroupList"] = new Group();
             ViewData["GroupList"] = groupQuery.GetAllGroups();
             return View();
@@ -190,10 +189,19 @@ namespace AM_Assignment2.Controllers
                     var found_user = userManager.FindByEmail(model.Email); // Find user in Identity database by email
 
                     // Create user record for application database
-                    var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate=DateTime.Today, GroupID=model.GroupID };
-                    app_database.User.Add(application_user);
+                    if(model.GroupID != 0) // If group selected, create user with selected group
+                    {
+                        var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today, GroupID = model.GroupID };
+                        app_database.User.Add(application_user);
+                    }
+                    else // Create user without group assigned
+                    {
+                        var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today };
+                        app_database.User.Add(application_user);
+                    }
 
                     app_database.SaveChanges(); // COMMIT changes to database
+                    app_database.Dispose();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
