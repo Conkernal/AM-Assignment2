@@ -121,7 +121,7 @@ namespace AM_Assignment2.Controllers
             {
                 return RedirectToAction("UnsafeDeletion/" + id);
             }
-            else
+            else // Delete group
             {
                 Group group = db.Group.Find(id);
                 db.Group.Remove(group);
@@ -130,20 +130,22 @@ namespace AM_Assignment2.Controllers
             return RedirectToAction("Index");
         }
 
-        public async System.Threading.Tasks.Task<ActionResult> UnsafeDeletion(int id)
+        // Group/UnsafeDeletion/id
+        // Description: If admin tries to delete group that has users still assigned to it (referential integrity), then display the users affected
+        public async System.Threading.Tasks.Task<ActionResult> UnsafeDeletion(int groupID)
         {
             UserQuery userQuery = new UserQuery();
-            List<User> qryResult = userQuery.GetUserByGroup(id);
+            List<User> qryResult = userQuery.GetUserByGroup(groupID); // Select all users in corresponding group
             List<ApplicationUser> userGroupList = new List<ApplicationUser>();
 
             // For each user with corresponding group ID
             foreach (var item in qryResult)
             {
-                ApplicationUser identity_user = await UserManager.FindByIdAsync(item.UserID);
+                ApplicationUser identity_user = await UserManager.FindByIdAsync(item.UserID); // Get user from identity database
                 userGroupList.Add(identity_user);
             }
 
-            ViewData["UsersInGroup"] = userGroupList;
+            ViewData["UsersInGroup"] = userGroupList; // For View
             return View();
         }
 
