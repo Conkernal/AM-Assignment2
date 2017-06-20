@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using AM_Assignment2.DAL;
 using AM_Assignment2.Models;
+using AM_Assignment2.Helpers;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace AM_Assignment2.Controllers
 {
@@ -15,6 +17,7 @@ namespace AM_Assignment2.Controllers
     [Authorize(Roles = "Administrator")] // Secure to administrators only
     public class GroupController : Controller
     {
+        private ApplicationUserManager _userManager;
         private App_Database db = new App_Database();
 
         // GET: Group
@@ -112,10 +115,48 @@ namespace AM_Assignment2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Group group = db.Group.Find(id);
-            db.Group.Remove(group);
-            db.SaveChanges();
+            UserQuery userQuery = new UserQuery();
+            List<User> u = userQuery.GetUserByGroup(id);
+            if(u.Count > 0) // If there are users still assigned to the group that's being deleted
+            {
+                return RedirectToAction("UnsafeDeletion/" + id);
+            }
+            else
+            {
+                Group group = db.Group.Find(id);
+                db.Group.Remove(group);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
+        }
+
+        public async System.Threading.Tasks.Task<ActionResult> UnsafeDeletion(int id)
+        {
+            UserQuery userQuery = new UserQuery();
+            List<User> qryResult = userQuery.GetUserByGroup(id);
+            List<ApplicationUser> userGroupList = new List<ApplicationUser>();
+
+            // For each user with corresponding group ID
+            foreach (var item in qryResult)
+            {
+                ApplicationUser identity_user = await UserManager.FindByIdAsync(item.UserID);
+                userGroupList.Add(identity_user);
+            }
+
+            ViewData["UsersInGroup"] = userGroupList;
+            return View();
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         protected override void Dispose(bool disposing)

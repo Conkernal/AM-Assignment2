@@ -100,6 +100,7 @@ namespace AM_Assignment2.Controllers
                     User user = app_database.User.Find(identity_user.Id);
                     user.LastLoginTime = DateTime.Now;
                     app_database.SaveChanges();
+                    app_database.Dispose();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
