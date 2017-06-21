@@ -1,7 +1,46 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Activity Two: Input attributes";
 }
 
-<h2>Index</h2>
+<h2>Input Attributes</h2>
+
+<p>
+	HTML5 added the following attributes for input:<br />
+	<br />
+	<b>Autocomplete</b> - When autocomplete is on, the browser automatically completes input values based that the user has entered before.<br />
+	<br />
+	The following is an example in code: <br />
+	<br />
+	<b>
+		action="/action_page.php" autocomplete="on"<br />
+		First name: input type="text" name="fname"<br />
+		Last name: input type="text" name="lname"<br />
+		E-mail: input type="email" name="email" autocomplete="off"<br />
+		input type="submit"<br />
+	</b>
+	<br />
+	<br />
+	<b>Autofocus</b> - The autofocus attribute specifies that the input field should automatically get focus when the page loads.<br />
+	<br />
+	Example: Let the "First Name" input field automatically get focus when the page loads:<br />
+	<br />
+	<b>First name: input type="text" name="fname" autofocus</b><br />
+	<br />
+	<br />
+	<b>Min and Max</b> - The min and max attributes specify the minimum and maximum values for an input element. E.g. number, range, date, datetime-local, month, time and week.<br />
+	<br />
+	Example: elements with min and max values:<br />
+	<br />
+	Enter a date before 1980-01-01:
+	<b>input type="date" name="bday" max="1979-12-31"</b> <br />
+	<br />
+	Enter a date after 2000-01-01:
+	<b>input type="date" name="bday" min="2000-01-02"</b> <br />
+	<br />
+	Quantity (between 1 and 5):
+	<b>input type="number" name="quantity" min="1" max="5"</b> <br />
+	<br />
+</p>
+
 
