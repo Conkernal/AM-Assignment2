@@ -10,6 +10,7 @@ using AM_Assignment2.DAL;
 using AM_Assignment2.Models;
 using AM_Assignment2.Helpers;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace AM_Assignment2.Controllers
 {
@@ -116,10 +117,17 @@ namespace AM_Assignment2.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             UserQuery userQuery = new UserQuery();
-            List<User> u = userQuery.GetUserByGroup(id);
-            if(u.Count > 0) // If there are users still assigned to the group that's being deleted
+            List<User> listOfUsersInGroup = userQuery.GetUserByGroup(id);
+            List<string> userEmailList = new List<string>();
+            if (listOfUsersInGroup.Count > 0) // If there are users still assigned to the group that's being deleted
             {
-                return RedirectToAction("UnsafeDeletion/" + id);
+                foreach (var user in listOfUsersInGroup)
+                {
+                    userEmailList.Add(userQuery.GetUserEmailByUserID(user.UserID));
+                }
+                ViewData["UserEmailList"] = userEmailList;
+                ViewData["UserIDList"] = listOfUsersInGroup;
+                return RedirectToAction("UnsafeDeletion", new { groupID = id });
             }
             else // Delete group
             {
@@ -130,9 +138,10 @@ namespace AM_Assignment2.Controllers
             return RedirectToAction("Index");
         }
 
-        // Group/UnsafeDeletion/id
+        // GET: Group/UnsafeDeletion/groupID
         // Description: If admin tries to delete group that has users still assigned to it (referential integrity), then display the users affected
-        public async System.Threading.Tasks.Task<ActionResult> UnsafeDeletion(int groupID)
+        [HttpGet]
+        public ActionResult UnsafeDeletion(int groupID)
         {
             UserQuery userQuery = new UserQuery();
             List<User> qryResult = userQuery.GetUserByGroup(groupID); // Select all users in corresponding group
@@ -141,7 +150,7 @@ namespace AM_Assignment2.Controllers
             // For each user with corresponding group ID
             foreach (var item in qryResult)
             {
-                ApplicationUser identity_user = await UserManager.FindByIdAsync(item.UserID); // Get user from identity database
+                ApplicationUser identity_user = UserManager.FindById(item.UserID); // Get user from identity database
                 userGroupList.Add(identity_user);
             }
 

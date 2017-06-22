@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "List of users";
+    AM_Assignment2.Helpers.GroupQuery groupQuery = new AM_Assignment2.Helpers.GroupQuery();
+    AM_Assignment2.Helpers.UserQuery userQuery = new AM_Assignment2.Helpers.UserQuery();
+}
+
+<h2>ShowUsers</h2>
+@foreach (var item in ViewData["AllUsers"] as List<AM_Assignment2.Models.User>)
+{
+    IList<string> userRoleList = userQuery.GetRoleByUserID(@item.UserID);
+    <ul>
+        <li>User ID: @item.UserID</li>
+        <li>Email: @userQuery.GetUserEmailByUserID(@item.UserID)</li>
+        @for (int i = 0; i < userRoleList.Count; i++)
+        {
+            <li>Role: @userRoleList[i]</li>
+        }
+        <li>Creation date: @item.UserCreationDate.Date.ToLongDateString()</li>
+        @if (@item.LastLoginTime.HasValue) // If user has logged in previously
+        {
+            <li>Last access: @item.LastLoginTime</li>
+        }
+        else // Else, user is a new account
+        {
+            <li>Last access: Never</li>
+        }
+        <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID)</li>
+    </ul><hr />
+}

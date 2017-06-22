@@ -259,6 +259,7 @@
     <Content Include="Views\ActivityOne\Index.cshtml" />
     <Content Include="Views\Group\UnsafeDeletion.cshtml" />
     <Content Include="Views\ActivityTwo\Index.cshtml" />
+    <Content Include="Views\Account\ShowUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

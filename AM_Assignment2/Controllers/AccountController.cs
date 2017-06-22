@@ -12,6 +12,7 @@ using AM_Assignment2.Models;
 using AM_Assignment2.DAL;
 using Microsoft.AspNet.Identity.EntityFramework;
 using AM_Assignment2.Helpers;
+using System.Collections.Generic;
 
 namespace AM_Assignment2.Controllers
 {
@@ -38,7 +39,7 @@ namespace AM_Assignment2.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -50,9 +51,9 @@ namespace AM_Assignment2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -142,7 +143,7 @@ namespace AM_Assignment2.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -180,7 +181,7 @@ namespace AM_Assignment2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     App_Database app_database = new App_Database(); // App_database object to use the application database for adding a user
 
@@ -190,7 +191,7 @@ namespace AM_Assignment2.Controllers
                     var found_user = userManager.FindByEmail(model.Email); // Find user in Identity database by email
 
                     // Create user record for application database
-                    if(model.GroupID != 0) // If group selected, create user with selected group
+                    if (model.GroupID != 0) // If group selected, create user with selected group
                     {
                         var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today, GroupID = model.GroupID };
                         app_database.User.Add(application_user);
@@ -440,6 +441,24 @@ namespace AM_Assignment2.Controllers
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // /Account/ShowUsers
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ShowUsers()
+        {
+            UserQuery userQuery = new UserQuery();
+            List<User> listOfAllUsers = userQuery.GetAllUsers();
+            if (listOfAllUsers.Count > 0)
+            {
+                ViewData["AllUsers"] = listOfAllUsers;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         //
