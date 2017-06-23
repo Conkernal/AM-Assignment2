@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AM_Assignment2.Models
+﻿namespace AM_Assignment2.Models
 {
     // Class definition of Status table
     public class Status
