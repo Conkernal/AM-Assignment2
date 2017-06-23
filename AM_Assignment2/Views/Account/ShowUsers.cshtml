@@ -26,5 +26,6 @@
             <li>Last access: Never</li>
         }
         <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID)</li>
+        <li>@Html.ActionLink("Delete user", "DeleteUser", new { userID = @item.UserID, confirmed = false })</li>
     </ul><hr />
 }

@@ -1,0 +1,9 @@
+﻿
+@{
+    ViewBag.Title = "Confirm Delete User";
+}
+
+<h2>Danger!</h2>
+<p>Are you sure you want to delete this user?</p>
+<p>E-mail: @ViewData["UserDataInAppDatabase"].ToString()</p>
+<li>@Html.ActionLink("Delete user", "DeleteUser", new { userID = ViewData["UserID"], confirmed = true })</li>

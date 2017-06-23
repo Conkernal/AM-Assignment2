@@ -69,6 +69,20 @@ namespace AM_Assignment2.Helpers
             return userList;
         }
 
+        // Delete user record from application database
+        public void DeleteUser(string userID)
+        {
+            var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
+            var dbcommand = new SqlCommand();
+            dbcommand.Connection = dbcon;
+            dbcommand.CommandText = "DELETE FROM [User] WHERE UserID = @UserID";
+            dbcommand.Parameters.AddWithValue("@UserID", userID);
+
+            dbcon.Open();
+            dbcommand.ExecuteNonQuery();
+            dbcon.Close();
+        }
+
         // Get UserEmail by UserID
         public string GetUserEmailByUserID(string userID)
         {

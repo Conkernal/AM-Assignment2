@@ -518,6 +518,38 @@ namespace AM_Assignment2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ConfirmDeleteUser(string userID)
+        {
+            UserQuery userQuery = new UserQuery();
+            ViewData["UserDataInAppDatabase"] = userQuery.GetUserEmailByUserID(userID);
+            ViewData["UserID"] = userID;
+            return View();
+        }
+
+        /* Deletes a user 
+         * userID = unique identifier of the user
+         * confirmed = true or false, whether the deletion has been confirmed by the admin
+         */
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeleteUser(string userID, bool confirmed)
+        {
+            if (confirmed == false)
+            {   //  If deletion has not been confirmed by admin, request confirmation
+                return RedirectToAction("ConfirmDeleteUser", "Account", new { userID = userID });
+            }
+            else
+            {   //  If deletion is confirmed, then delete user records from the databases
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                ApplicationUser foundUser = userManager.FindById(userID);
+                userManager.Delete(foundUser); // Delete from identity database
+                UserQuery userQuery = new UserQuery();
+                userQuery.DeleteUser(userID);  // Delete from application database
+                return RedirectToAction("ShowUsers", "Account");
+            }
+        }
+
         internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
