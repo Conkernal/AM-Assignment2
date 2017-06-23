@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AM_Assignment2.DAL;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace AM_Assignment2.Models
 {
@@ -77,8 +81,17 @@ namespace AM_Assignment2.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Group")]
+        public int GroupID { get; set; }
+
+    }
+
+    public class GroupViewModel
+    {
+        public List<Group> GroupList { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -96,7 +109,7 @@ namespace AM_Assignment2.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

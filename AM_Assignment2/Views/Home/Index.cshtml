@@ -4,6 +4,7 @@
 @{
     if (HttpContext.Current.User.IsInRole("Administrator"))
     {
+        <li><a href="Account/ShowUsers">Show users</a></li>
         <li><a href="Account/Register">Create user</a></li>
         <li><a href="Group/Index">Group management</a></li>
     }

@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityOneController.cs" />
+    <Compile Include="Controllers\ActivityTwoController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GroupQuery.cs" />
+    <Compile Include="Helpers\UserQuery.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -254,8 +257,10 @@
     <Content Include="Views\Quiz\Index.cshtml" />
     <Content Include="Views\Quiz\Results.cshtml" />
     <Content Include="Views\ActivityOne\Index.cshtml" />
+    <Content Include="Views\Group\UnsafeDeletion.cshtml" />
     <Content Include="Views\ActivityTwo\Index.cshtml" />
-    <Content Include="Views\ActivityThree\Index.cshtml" />
+    <Content Include="Views\Account\ShowUsers.cshtml" />
+    <Content Include="Views\Account\ConfirmDeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

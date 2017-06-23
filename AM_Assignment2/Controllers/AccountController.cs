@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using AM_Assignment2.Models;
 using AM_Assignment2.DAL;
 using Microsoft.AspNet.Identity.EntityFramework;
+using AM_Assignment2.Helpers;
+using System.Collections.Generic;
 
 namespace AM_Assignment2.Controllers
 {
@@ -37,7 +39,7 @@ namespace AM_Assignment2.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -49,9 +51,9 @@ namespace AM_Assignment2.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -99,6 +101,7 @@ namespace AM_Assignment2.Controllers
                     User user = app_database.User.Find(identity_user.Id);
                     user.LastLoginTime = DateTime.Now;
                     app_database.SaveChanges();
+                    app_database.Dispose();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -140,7 +143,7 @@ namespace AM_Assignment2.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -157,8 +160,11 @@ namespace AM_Assignment2.Controllers
         //
         // GET: /Account/Register
         [Authorize(Roles = "Administrator")] // Secure to administrators only
-        public ActionResult Register()
+        public ActionResult Register(GroupViewModel groupList)
         {
+            GroupQuery groupQuery = new GroupQuery();
+            ViewData["GroupList"] = new Group();
+            ViewData["GroupList"] = groupQuery.GetAllGroups();
             return View();
         }
 
@@ -175,7 +181,7 @@ namespace AM_Assignment2.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     App_Database app_database = new App_Database(); // App_database object to use the application database for adding a user
 
@@ -185,11 +191,19 @@ namespace AM_Assignment2.Controllers
                     var found_user = userManager.FindByEmail(model.Email); // Find user in Identity database by email
 
                     // Create user record for application database
-                    var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate=DateTime.Today };
-                    app_database.User.Add(application_user);
+                    if (model.GroupID != 0) // If group selected, create user with selected group
+                    {
+                        var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today, GroupID = model.GroupID };
+                        app_database.User.Add(application_user);
+                    }
+                    else // Create user without group assigned
+                    {
+                        var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today };
+                        app_database.User.Add(application_user);
+                    }
 
                     app_database.SaveChanges(); // COMMIT changes to database
-
+                    app_database.Dispose();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -430,6 +444,24 @@ namespace AM_Assignment2.Controllers
         }
 
         //
+        // /Account/ShowUsers
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ShowUsers()
+        {
+            UserQuery userQuery = new UserQuery();
+            List<User> listOfAllUsers = userQuery.GetAllUsers();
+            if (listOfAllUsers.Count > 0)
+            {
+                ViewData["AllUsers"] = listOfAllUsers;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
@@ -484,6 +516,38 @@ namespace AM_Assignment2.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        //
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ConfirmDeleteUser(string userID)
+        {
+            UserQuery userQuery = new UserQuery();
+            ViewData["UserDataInAppDatabase"] = userQuery.GetUserEmailByUserID(userID);
+            ViewData["UserID"] = userID;
+            return View();
+        }
+
+        /* Deletes a user 
+         * userID = unique identifier of the user
+         * confirmed = true or false, whether the deletion has been confirmed by the admin
+         */
+        [Authorize(Roles = "Administrator")]
+        public ActionResult DeleteUser(string userID, bool confirmed)
+        {
+            if (confirmed == false)
+            {   //  If deletion has not been confirmed by admin, request confirmation
+                return RedirectToAction("ConfirmDeleteUser", "Account", new { userID = userID });
+            }
+            else
+            {   //  If deletion is confirmed, then delete user records from the databases
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                ApplicationUser foundUser = userManager.FindById(userID);
+                userManager.Delete(foundUser); // Delete from identity database
+                UserQuery userQuery = new UserQuery();
+                userQuery.DeleteUser(userID);  // Delete from application database
+                return RedirectToAction("ShowUsers", "Account");
+            }
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

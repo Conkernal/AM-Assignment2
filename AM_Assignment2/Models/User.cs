@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace AM_Assignment2.Models
 {
@@ -23,5 +20,8 @@ namespace AM_Assignment2.Models
         public DateTime UserCreationDate { get; set; }
 
         public DateTime? LastLoginTime { get; set; } // The ? allows this field to be nullable
+
+        public int? GroupID { get; set; } // Group assigned to user
+
     }
 }
