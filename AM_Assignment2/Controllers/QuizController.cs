@@ -15,19 +15,14 @@ namespace AM_Assignment2
         {
             return View();
         }
+        // Controller
+
         [HttpPost]
-        public ActionResult Results(bool semantic, bool nonsemantic, string contactMethod, bool table, bool span, bool article)
+        public ActionResult Results(string Answer1, string Answer2, string Answer3)
         {
-            ViewBag.ContactMethod = contactMethod;
-            var list = new List<String>();
-            var list2 = new List<String>();
-            if (semantic) list.Add("semantic - correct");
-            if (nonsemantic) list.Add("non-semantic - wrong");
-            if (table) list2.Add("table - wrong");
-            if (span) list2.Add("span - correct");
-            if (article) list2.Add("article - wrong");
-            ViewBag.InformMethods = list;
-            ViewBag.SomethingMethods = list2;
+            ViewData["Answer1"] = Answer1;
+            ViewData["Answer2"] = Answer2;
+            ViewData["Answer3"] = Answer3;
             return View();
         }
 

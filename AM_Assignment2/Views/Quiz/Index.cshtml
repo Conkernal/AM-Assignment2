@@ -10,37 +10,25 @@
 
 <h1>Quiz</h1>
 
-
-@using (Html.BeginForm("Results", "Quiz"))
-{
-	<h4>Question One: </h4>
-
-	<p>Is "Form" a semantic or non-semantic html5 element?</p>
-	<p>
-		@Html.Label("semantic")
-		@Html.CheckBox("semantic", false)
+	@using (Html.BeginForm("Results", "Quiz"))
+	{
+		<h3>Question One:</h3>
+		<h4>What makes a semantic element semantic?</h4>
+		@Html.RadioButton("Answer1", "A") <span>The name says what it is</span><br />
+		@Html.RadioButton("Answer1", "B") <span>The name does not say what it is</span>
 		<br />
-		@Html.Label("non-semantic")
-		@Html.CheckBox("nonsemantic", false)
-	</p>
-	<h4>Question Two: </h4>
-
-	<p>Which of the following is a non-semantic html5 element? (SELECT ONE)</p>
-	<p>
-
-		@Html.Label("table")
-		@Html.CheckBox("table", false)
+		<h3>Question Two:</h3> 
+		<h4>Which of the following is a semantic element?</h4>
+		@Html.RadioButton("Answer2", "A") <span>Div</span><br />
+		@Html.RadioButton("Answer2", "B") <span>Table</span><br />
+		@Html.RadioButton("Answer2", "C") <span>Span</span>
 		<br />
-		@Html.Label("span")
-		@Html.CheckBox("span", false)
+		<h3>Question Three:</h3>
+		<h4>Was Autocomplete added as a Input Attribute in Html5?</h4>
+		@Html.RadioButton("Answer3", "A") <span>Yes</span><br />
+		@Html.RadioButton("Answer3", "B") <span>No</span>
 		<br />
-		@Html.Label("article")
-		@Html.CheckBox("article", false)
-	</p>
-
-	<br />
-	<br />
-	<input type="submit" value="Submit" />
-
-}
+		<br />
+		<input type="submit" value="Submit" />
+	}
 
