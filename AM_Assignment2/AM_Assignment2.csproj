@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActivityOneController.cs" />
+    <Compile Include="Controllers\ActivityThreeController.cs" />
     <Compile Include="Controllers\ActivityTwoController.cs" />
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -260,6 +261,7 @@
     <Content Include="Views\ActivityTwo\Index.cshtml" />
     <Content Include="Views\Account\ShowUsers.cshtml" />
     <Content Include="Views\Account\ConfirmDeleteUser.cshtml" />
+    <Content Include="Views\ActivityThree\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
