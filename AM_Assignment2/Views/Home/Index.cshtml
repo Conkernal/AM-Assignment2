@@ -4,9 +4,23 @@
 @{
     if (HttpContext.Current.User.IsInRole("Administrator"))
     {
-        <li><a href="Account/ShowUsers">Show users</a></li>
-        <li><a href="Account/Register">Create user</a></li>
-        <li><a href="Group/Index">Group management</a></li>
+        <div class="row" style="vertical-align:central">
+            <div class="col-md-1">
+                <p><a class="btn btn-default" 
+                      style="color:antiquewhite; background-color:darkred;" 
+                      a href="Account/ShowUsers">Show users</a></p>
+            </div>
+            <div class="col-md-1">
+                <p><a class="btn btn-default" 
+                      style="color:antiquewhite; background-color:darkred; margin-left: 10px;"
+                      a href="Account/Register">Create user</a></p>
+            </div>
+            <div class="col-md-1">
+                <p><a class="btn btn-default" 
+                      style="color:antiquewhite; background-color:darkred; margin-left: 20px;"
+                      a href="Group/Index">Group management</a></p>
+            </div>
+            </div>
     }
     else
     {
@@ -14,27 +28,28 @@
     }
 }
 
-<div class="jumbotron">
-    <h1>Learning Outcome</h1>
+<div class="jumbotron" style="text-align:center; background: linear-gradient(#662D8C, #ED1E79);">
+    <h1 style="color:antiquewhite">Welcome to HTML5 4 Noobs</h1>
+    <p class="lead" style="text-align:center">Here you will be able to learn the fundamentals of HTML5 </p>
     <p class="lead">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="text-align:center;background: linear-gradient(#D4145A, #FBB03B);" >
         <h2>Activity 1</h2>
         <p>
             HTML5 semantics
         </p>
-        <p><a class="btn btn-default" href="/ActivityOne">Start Activity 1&raquo;</a></p>
+        <p><a class="btn btn-default"  href="/ActivityOne">Start Activity 1&raquo;</a></p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4"  style="text-align:center;background: linear-gradient(#2E3192 ,#1BFFFF);">
         <h2>Activity 2</h2>
         <p>Input attributes</p>
-        <p><a class="btn btn-default" href="/ActivityTwo">Start Activity 2&raquo;</a></p>
+        <p><a class="btn btn-default"  href="/ActivityTwo">Start Activity 2&raquo;</a></p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4"style="text-align:center;background: linear-gradient(#009245,#FCEE21);">
         <h2>Activity 3</h2>
         <p>Web Form Stuctures</p>
-        <p><a class="btn btn-default" href="/ActivityThree">Start Activity 3&raquo;</a></p>
+        <p><a class="btn btn-default" style="vertical-align:central;"href="/ActivityThree">Start Activity 3&raquo;</a></p>
     </div>
 </div>
