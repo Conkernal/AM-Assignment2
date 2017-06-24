@@ -4,20 +4,20 @@
 @{
     if (HttpContext.Current.User.IsInRole("Administrator"))
     {
-        <div class="row" style="vertical-align:central">
-            <div class="col-md-1">
-                <p><a class="btn btn-default" 
+        <div class="row" style="padding-top:40px">
+            <div class="col-md-3">
+                <p><a class="btn btn-lg" 
                       style="color:antiquewhite; background-color:darkred;" 
                       a href="Account/ShowUsers">Show users</a></p>
             </div>
-            <div class="col-md-1">
-                <p><a class="btn btn-default" 
-                      style="color:antiquewhite; background-color:darkred; margin-left: 10px;"
+            <div class="col-md-3" style="float:left;">
+                <p><a class="btn btn-lg" 
+                      style="color:antiquewhite; background-color:darkred;"
                       a href="Account/Register">Create user</a></p>
             </div>
-            <div class="col-md-1">
-                <p><a class="btn btn-default" 
-                      style="color:antiquewhite; background-color:darkred; margin-left: 20px;"
+            <div class="col-md-3">  
+                <p ><a class="btn btn-lg" 
+                      style="color:antiquewhite; background-color:darkred;"
                       a href="Group/Index">Group management</a></p>
             </div>
             </div>
@@ -29,27 +29,38 @@
 }
 
 <div class="jumbotron" style="text-align:center; background: linear-gradient(#662D8C, #ED1E79);">
-    <h1 style="color:antiquewhite">Welcome to HTML5 4 Noobs</h1>
-    <p class="lead" style="text-align:center">Here you will be able to learn the fundamentals of HTML5 </p>
-    <p class="lead">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
+    <h1 style="color:antiquewhite; font-weight: bold">Welcome to HTML5 4 Noobs</h1>
+    <p class="lead" style="text-align:center; color:antiquewhite">Here, you will be able to learn the fundamentals of HTML5 </p>
+</div>
+
+<div class="jumbotron" style="text-align:center; background: linear-gradient(#B066FE, #63E2FF); max-height:-50px">
+    <h1 style="color:antiquewhite">Your Learning Outcomes</h1>
+    <p class="lead" style="text-align:center;color:antiquewhite">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
 </div>
 
 <div class="row">
     <div class="col-md-4" style="text-align:center;background: linear-gradient(#D4145A, #FBB03B);" >
-        <h2>Activity 1</h2>
-        <p>
-            HTML5 semantics
+        <h2 style="font-weight: bold">Activity 1</h2>
+        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+            Semantics
         </p>
+            <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px" />
         <p><a class="btn btn-default"  href="/ActivityOne">Start Activity 1&raquo;</a></p>
     </div>
     <div class="col-md-4"  style="text-align:center;background: linear-gradient(#2E3192 ,#1BFFFF);">
         <h2>Activity 2</h2>
-        <p>Input attributes</p>
+        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+            Input attributes
+        </p>
+        <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px   " />
         <p><a class="btn btn-default"  href="/ActivityTwo">Start Activity 2&raquo;</a></p>
     </div>
     <div class="col-md-4"style="text-align:center;background: linear-gradient(#009245,#FCEE21);">
         <h2>Activity 3</h2>
-        <p>Web Form Stuctures</p>
+        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+            Web Form Stuctures
+        </p>
+        <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px" />
         <p><a class="btn btn-default" style="vertical-align:central;"href="/ActivityThree">Start Activity 3&raquo;</a></p>
     </div>
 </div>
