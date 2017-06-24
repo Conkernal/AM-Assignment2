@@ -4,7 +4,11 @@
 @{
     if (HttpContext.Current.User.IsInRole("Administrator"))
     {
-        <div class="row" style="margin-top:40px">
+        <div class="row" style="align-items:center; padding-top:20px; align-self: center; background-color:#E3B628">
+                <h1 style="color:darkred; font-weight: bold; float:left; margin-left:20px;position: relative; top: 50%;transform: translateY(-50%);">
+                    Administrator Settings
+                </h1>
+
                 <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
                       style="color:antiquewhite; background-color:darkred;" 
                       a href="Account/ShowUsers">Show users</a></p>
@@ -16,6 +20,8 @@
                 <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
                       style="color:antiquewhite; background-color:darkred;"
                       a href="Group/Index">Group management</a></p>
+                
+
             </div>
     }
     else
@@ -25,11 +31,11 @@
 }
 
 <div class="jumbotron" style="text-align:center; background: linear-gradient(#662D8C, #ED1E79); margin-bottom:10px;">
-    <h1 style="color:antiquewhite; font-weight: bold">Welcome to HTML5 4 Noobs</h1>
+    <h1 style="color:antiquewhite">Welcome to HTML5 4 Noobs</h1>
     <p class="lead" style="text-align:center; color:antiquewhite">Here, you will be able to learn the fundamentals of HTML5 </p>
 </div>
 
-<div class="jumbotron" style="text-align:center; background: linear-gradient(#B066FE, #63E2FF);">
+<div class="jumbotron" style="text-align:center; background: linear-gradient(#B066FE, #63E2FF);margin-bottom:10px;">
     <h1 style="color:antiquewhite">Your Learning Outcomes</h1>
     <p class="lead" style="text-align:center;color:antiquewhite">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
 </div>
@@ -37,26 +43,35 @@
 <div class="row" style="margin-bottom:5px">
     <div class="col-md-4" style="text-align:center;background: linear-gradient(#D4145A, #FBB03B);" >
         <h2 style="font-weight: bold">Activity 1</h2>
-        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+        <p style="color:antiquewhite; font-weight: bold; font-size:24px;">
             Semantics
         </p>
-            <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px" />
-        <p><a class="btn btn-default"  href="/ActivityOne">Start Activity 1&raquo;</a></p>
+            <img src="~/Content/Images/HTML5logo.png" width="125" height="125" style="margin:5px" />
+        <p><a class="btn btn-default"  style="text-align:center;background: #2E3192; color:antiquewhite;font-weight:bolder "
+              href="/ActivityOne">Start Activity 1&raquo;</a></p>
     </div>
-    <div class="col-md-4"  style="text-align:center;background: linear-gradient(#2E3192 ,#1BFFFF);">
-        <h2>Activity 2</h2>
-        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+
+    <div class="col-md-4" style="text-align:center;background: linear-gradient(#2E3192 ,#1BFFFF);">
+        <h2 style="font-weight: bold">Activity 2</h2>
+        <p style="color:antiquewhite; font-weight: bold; font-size:24px;">
             Input attributes
         </p>
-        <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px   " />
-        <p><a class="btn btn-default"  href="/ActivityTwo">Start Activity 2&raquo;</a></p>
+        <img src="~/Content/Images/HTML5logo.png" width="125" height="125" style="margin:5px   " />
+        <p>
+            <a class="btn btn-default" style="text-align:center;background:#2E3192;color:antiquewhite;font-weight:bolder "
+               href="/ActivityTwo">Start Activity 2&raquo;</a>
+        </p>
     </div>
+
     <div class="col-md-4"style="text-align:center;background: linear-gradient(#009245,#FCEE21);">
-        <h2>Activity 3</h2>
-        <p style="color:antiquewhite; font-weight: bold; font-size:large">
+        <h2 style="font-weight: bold">Activity 3</h2>
+        <p style="color:antiquewhite; font-weight: bold; font-size:24px;">
             Web Form Stuctures
         </p>
-        <img src="~/Content/Images/HTML5logo.png" width="150px" height="150px" style="margin:10px" />
-        <p><a class="btn btn-default" style="vertical-align:central;"href="/ActivityThree">Start Activity 3&raquo;</a></p>
+        <img src="~/Content/Images/HTML5logo.png" width="125" height="125" style="margin:5px" />
+        <p>
+        <a class="btn btn-default" style="text-align:center;background:#2E3192;color:antiquewhite;font-weight:bolder "
+           href="/ActivityThree">Start Activity 3&raquo;</a>
+        </p>
     </div>
 </div>
