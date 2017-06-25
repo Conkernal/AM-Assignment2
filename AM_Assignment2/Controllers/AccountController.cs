@@ -462,6 +462,25 @@ namespace AM_Assignment2.Controllers
         }
 
         //
+        // GET: /Account/ChangeGroup
+        [Authorize(Roles ="Administrator")]
+        public ActionResult ChangeGroup(string userID, int groupID)
+        {
+            ViewData["EditGroupID"] = groupID;
+            return View();
+        }
+
+        //
+        // POST: /Account/ProcessChangeGroup
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ProcessChangeGroup(ChangeGroupViewModel model)
+        {
+            UserQuery userQuery = new UserQuery();
+            userQuery.UpdateGroupByUserID(model.UserID, model.GroupID);
+            return RedirectToAction("ChangeGroup, Account");
+        }
+
+        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()

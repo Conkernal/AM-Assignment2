@@ -94,6 +94,14 @@ namespace AM_Assignment2.Models
         public List<Group> GroupList { get; set; }
     }
 
+    public class ChangeGroupViewModel
+    {
+        public string UserID { get; set; }
+        [Display(Name = "Group")]
+        public int GroupID { get; set; }
+    }
+
+
     public class ResetPasswordViewModel
     {
         [Required]

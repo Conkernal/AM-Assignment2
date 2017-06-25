@@ -102,5 +102,20 @@ namespace AM_Assignment2.Helpers
             var RolesForUser = userManager.GetRoles(userID);
             return RolesForUser;
         }
+
+        // Update group by UserID
+        public void UpdateGroupByUserID(string userID, int groupID)
+        {
+            var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
+            var dbcommand = new SqlCommand();
+            dbcommand.Connection = dbcon;
+            dbcommand.CommandText = "UPDATE [User] SET GroupID = @GroupID WHERE UserID = @UserID";
+            dbcommand.Parameters.AddWithValue("@GroupID", groupID);
+            dbcommand.Parameters.AddWithValue("@UserID", userID);
+
+            dbcon.Open();
+            dbcommand.ExecuteNonQuery();
+            dbcon.Close();
+        }
     }
 }

@@ -5,7 +5,7 @@
     AM_Assignment2.Helpers.UserQuery userQuery = new AM_Assignment2.Helpers.UserQuery();
 }
 
-<h2>ShowUsers</h2>
+<h2>List of users</h2>
 @foreach (var item in ViewData["AllUsers"] as List<AM_Assignment2.Models.User>)
 {
     IList<string> userRoleList = userQuery.GetRoleByUserID(@item.UserID);
@@ -25,7 +25,7 @@
         {
             <li>Last access: Never</li>
         }
-        <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID)</li>
+        <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID); @if (@item.GroupID.HasValue) { @Html.ActionLink("Change group", "ChangeGroup", new { userID = @item.UserID, groupID = @item.GroupID }) } else { @Html.ActionLink("Change group", "ChangeGroup", new { userID = @item.UserID, groupID = @item.GroupID })}</li>
         <li>@Html.ActionLink("Delete user", "DeleteUser", new { userID = @item.UserID, confirmed = false })</li>
     </ul><hr />
 }
