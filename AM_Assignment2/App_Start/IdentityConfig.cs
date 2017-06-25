@@ -53,8 +53,8 @@ namespace AM_Assignment2
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 11,
-                RequireNonLetterOrDigit = true,
+                RequiredLength = 12,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
                 RequireUppercase = false,
