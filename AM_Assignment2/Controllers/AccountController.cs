@@ -464,6 +464,7 @@ namespace AM_Assignment2.Controllers
         //
         // POST: /Account/ChangeGroup
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles ="Administrator")]
         public ActionResult ChangeGroup(ChangeGroupViewModel model)
         {
