@@ -462,15 +462,23 @@ namespace AM_Assignment2.Controllers
         }
 
         //
-        // GET: /Account/ChangeGroup
+        // POST: /Account/ChangeGroup
+        [AcceptVerbs(HttpVerbs.Post)]
         [Authorize(Roles ="Administrator")]
-        public ActionResult ChangeGroup(string userID, int groupID)
+        public ActionResult ChangeGroup(ChangeGroupViewModel model)
         {
-            ViewData["UserID"] = userID;
-            ViewData["EditGroupID"] = groupID;
-            GroupQuery groupQuery = new GroupQuery();
-            ViewData["GroupList"] = groupQuery.GetAllGroups();
-            return View();
+            if (ModelState.IsValid)
+            {
+                ViewData["UserID"] = model.UserID;
+                ViewData["EditGroupID"] = model.GroupID;
+                GroupQuery groupQuery = new GroupQuery();
+                ViewData["GroupList"] = groupQuery.GetAllGroups();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("ShowUsers", "Account");
+            }
         }
 
         //
@@ -480,7 +488,7 @@ namespace AM_Assignment2.Controllers
         {
             UserQuery userQuery = new UserQuery();
             userQuery.UpdateGroupByUserID(model.UserID, model.GroupID);
-            return RedirectToAction("ChangeGroup", "Account", new { userID = model.UserID, groupID = model.GroupID } );
+            return RedirectToAction("ShowUsers", "Account", new { userID = model.UserID, groupID = model.GroupID } );
         }
 
         //
