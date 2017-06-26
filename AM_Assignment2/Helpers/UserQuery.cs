@@ -117,5 +117,31 @@ namespace AM_Assignment2.Helpers
             dbcommand.ExecuteNonQuery();
             dbcon.Close();
         }
+
+        // Get user group from user
+        public int GetGroupByUserID(string userID)
+        {
+            var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
+            var dbcommand = new SqlCommand();
+            dbcommand.Connection = dbcon;
+            dbcommand.CommandText = "SELECT GroupID FROM [User] WHERE UserID = @UserID";
+            dbcommand.Parameters.AddWithValue("@UserID", userID);
+
+            dbcon.Open();
+            var reader = dbcommand.ExecuteReader();
+
+            var GroupData = new Group();
+            while (reader.Read())
+            {
+                if (!DBNull.Value.Equals(reader["GroupID"])) // Check if null first since GroupID is an optional attribute
+                {
+                    GroupData.GroupID = int.Parse(reader["GroupID"].ToString());
+                }
+            }
+
+            dbcon.Close();
+
+            return GroupData.GroupID;
+        }
     }
 }

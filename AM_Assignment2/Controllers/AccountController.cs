@@ -466,7 +466,10 @@ namespace AM_Assignment2.Controllers
         [Authorize(Roles ="Administrator")]
         public ActionResult ChangeGroup(string userID, int groupID)
         {
+            ViewData["UserID"] = userID;
             ViewData["EditGroupID"] = groupID;
+            GroupQuery groupQuery = new GroupQuery();
+            ViewData["GroupList"] = groupQuery.GetAllGroups();
             return View();
         }
 
@@ -477,7 +480,7 @@ namespace AM_Assignment2.Controllers
         {
             UserQuery userQuery = new UserQuery();
             userQuery.UpdateGroupByUserID(model.UserID, model.GroupID);
-            return RedirectToAction("ChangeGroup, Account");
+            return RedirectToAction("ChangeGroup", "Account", new { userID = model.UserID, groupID = model.GroupID } );
         }
 
         //
