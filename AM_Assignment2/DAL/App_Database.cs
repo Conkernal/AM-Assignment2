@@ -16,6 +16,8 @@ namespace AM_Assignment2.DAL
 
         public DbSet<Group> Group { get; set; }
 
+        public DbSet<Message> Message { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
