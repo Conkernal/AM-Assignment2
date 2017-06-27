@@ -1,7 +1,15 @@
-﻿
+﻿@using AM_Assignment2.Models;
 @{
     ViewBag.Title = "Messages";
+    AM_Assignment2.Helpers.MessageQuery messageQuery = new AM_Assignment2.Helpers.MessageQuery();
+    List<Message> inbox = messageQuery.GetInbox(User.Identity.Name); // Get messages that were sent to the logged in user
 }
 <a href="New">New message</a>
-<h2>Your messages</h2>
-
+<h2>Inbox</h2>
+@foreach(Message message in inbox)
+{
+    <li>@message.FromID</li>
+    <li>@message.MessageSubject</li>
+    <li>@message.MessageDate</li>
+    <li>@message.MessageBody</li>
+}
