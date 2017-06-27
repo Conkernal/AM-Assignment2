@@ -27,13 +27,15 @@ namespace AM_Assignment2.Helpers
             dbcommand.ExecuteNonQuery();
             dbcon.Close();
         }
-
+        
+        // Get inbox for certain user
+        // * userEmail = email of logged in user
         public List<Message> GetInbox(string userEmail)
         {
             var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
             var dbcommand = new SqlCommand();
             dbcommand.Connection = dbcon;
-            dbcommand.CommandText = "SELECT MessageID, ToID, FromID, MessageSubject, MessageBody, MessageDate FROM [Message] WHERE ToID = @ToID ORDER BY MessageDate";
+            dbcommand.CommandText = "SELECT MessageID, ToID, FromID, MessageSubject, MessageBody, MessageDate FROM [Message] WHERE ToID = @ToID ORDER BY MessageDate DESC";
             dbcommand.Parameters.AddWithValue("@ToID", userEmail);
 
             dbcon.Open();
