@@ -11,8 +11,6 @@ namespace AM_Assignment2.Models
     {
         [Required]
         public int MessageID { get; set; }
-
-
         [Required]
         public string SenderID { get; set; }
         [Required]
