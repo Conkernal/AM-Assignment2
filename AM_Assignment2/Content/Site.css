@@ -1,7 +1,18 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 75px;
 }
+
+.navbar-brand {
+    margin-top:5px;
+    margin-bottom:5px;
+    float:left;
+    background-image: url('Images/brandLogo.png');
+    background-repeat: no-repeat;
+    background-size:contain;
+    width:200px;
+    height:60px;
+}
+
 .navbar-inverse {
   background-color: #482E6B;
   border-color: #080808;

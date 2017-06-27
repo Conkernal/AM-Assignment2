@@ -4192,6 +4192,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-brand {
+  background:url(Images/HTML5logo.png);
   float: left;
   padding: 15px 15px;
   font-size: 18px;
