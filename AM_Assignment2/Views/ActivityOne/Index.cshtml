@@ -10,5 +10,7 @@
 <p>Semantic elements are tags that provide information about what they are or what they will store.</p>
 <p>For example: &lt;div&gt; and &lt;span&gt; are non-semantic, whereas &lt;form&gt;, &lt;table&gt;, and &lt;article&gt; are semantic as it says what it is.</p>
 <p>These are preferred over non-semantic as coders like to know what to put and where to put it.</p>
-
-<input id="ActivityOneFinishButton" type="button" value="Finish Activity" />
+@using (Html.BeginForm("Index", "Home"))
+{
+<input type="submit" value="Finish Activity" />
+}

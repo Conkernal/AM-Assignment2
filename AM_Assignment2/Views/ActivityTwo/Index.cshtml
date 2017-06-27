@@ -43,4 +43,7 @@
 	<br />
 </p>
 
-<input id="ActivityTwoFinishButton" type="button" value="Finish Activity" />
+@using (Html.BeginForm("Index", "Home"))
+{
+	<input type="submit" value="Finish Activity" />
+}

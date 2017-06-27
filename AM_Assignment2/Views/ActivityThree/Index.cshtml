@@ -10,5 +10,7 @@
 <p><b>URL</b> - This accepts only a URL value. The form must be in "http:// example.com", or http:// www.example.com to be accepted.</p><br />
 <p><b>date</b> - A date (year, month, day) encoded according to ISO 8601.</p><br />
 
-
-<input id="ActivityThreeFinishButton" type="button" value="Finish Activity" />
+@using (Html.BeginForm("Index", "Home"))
+{
+	<input type="submit" value="Finish Activity" />
+}
