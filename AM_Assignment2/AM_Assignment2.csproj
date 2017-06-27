@@ -174,7 +174,7 @@
     <Compile Include="Controllers\GroupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="DAL\App_Database.cs" />
@@ -189,7 +189,8 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Messaging.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageViewModels.cs" />
     <Compile Include="Models\Statistics.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\User.cs" />
@@ -268,12 +269,9 @@
     <Content Include="Views\Account\ConfirmDeleteUser.cshtml" />
     <Content Include="Views\ActivityThree\Index.cshtml" />
     <Content Include="Views\Account\ChangeGroup.cshtml" />
-    <Content Include="Views\Messages\Create.cshtml" />
-    <Content Include="Views\Messages\Delete.cshtml" />
-    <Content Include="Views\Messages\Details.cshtml" />
-    <Content Include="Views\Messages\Edit.cshtml" />
-    <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Message\Inbox.cshtml" />
+    <Content Include="Views\Message\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

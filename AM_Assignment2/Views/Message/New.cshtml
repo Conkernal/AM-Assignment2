@@ -1,0 +1,28 @@
+﻿@model AM_Assignment2.Models.SendMessageViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New message</h2>
+<form action="ProcessNewMessage" method="POST">
+    @Html.AntiForgeryToken()
+    <label>
+        To<br/>
+        <input name="To" type="email" />
+    </label>
+    <br />
+    <label>
+        Subject<br/>
+        <input name="MessageSubject" type="text" placeholder="Add a subject" />
+    </label>
+    <br />
+    <label>
+        Message<br/>
+        <textarea name="MessageBody">
+
+        </textarea>
+    </label>
+    <br />
+    <input type="submit" value="Send" />
+    <a href="Inbox">Discard</a>
+</form>
