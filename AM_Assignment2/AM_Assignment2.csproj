@@ -190,6 +190,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\MessageRead.cs" />
     <Compile Include="Models\MessageViewModels.cs" />
     <Compile Include="Models\Statistics.cs" />
     <Compile Include="Models\Status.cs" />
@@ -199,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Images\checkmark.png" />
+    <Content Include="Content\Images\HTML5logo.png" />
+    <Content Include="Content\Images\x mark.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

@@ -18,33 +18,58 @@ namespace AM_Assignment2.Helpers
             var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
             var dbcommand = new SqlCommand();
             dbcommand.Connection = dbcon;
-            dbcommand.CommandText = "INSERT INTO [Message] (ToID, FromID, MessageSubject, MessageBody, MessageDate) VALUES (@ToID, @FromID, @MessageSubject, @MessageBody, @MessageDate)";
+            dbcommand.CommandText = "INSERT INTO [Message] (ToID, FromID, MessageSubject, MessageBody, MessageDate) VALUES (@ToID, @FromID, @MessageSubject, @MessageBody, @MessageDate); SELECT SCOPE_IDENTITY();"; // Insert message then select last inserted ID
             dbcommand.Parameters.AddWithValue("@ToID", toID);
             dbcommand.Parameters.AddWithValue("@FromID", fromID);
             dbcommand.Parameters.AddWithValue("@MessageSubject", messageSubject);
             dbcommand.Parameters.AddWithValue("@MessageBody", messageBody);
             dbcommand.Parameters.AddWithValue("@MessageDate", DateTime.Now);
 
+            var messageReadSqlCommand = new SqlCommand();
+            messageReadSqlCommand.Connection = dbcon;
+            messageReadSqlCommand.CommandText = "INSERT INTO [MessageRead] (MessageID, ReaderID, MarkedAsRead) VALUES (@MessageID, @ReaderID, @MarkedAsRead)";
+            messageReadSqlCommand.Parameters.AddWithValue("@ReaderID", toID);
+            messageReadSqlCommand.Parameters.AddWithValue("@MarkedAsRead", false);
+
             dbcon.Open();
-            dbcommand.ExecuteNonQuery();
+            var messageID = dbcommand.ExecuteScalar(); // Get messageID for insert to message read table while running the INSERT statement for the message table
+            messageReadSqlCommand.Parameters.AddWithValue("@MessageID", messageID);
+            messageReadSqlCommand.ExecuteNonQuery(); // Insert into message read table (for determining whether message is unread by user)
             dbcon.Close();
         }
 
         // Send message to group 
         public void SendMessage(int groupID, string fromID, string messageSubject, string messageBody)
         {
+            if (string.IsNullOrEmpty(messageSubject)) // If no subject is set
+            {
+                messageSubject = "(no subject)";
+            }
             var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["App_Database"].ToString());
             var dbcommand = new SqlCommand();
             dbcommand.Connection = dbcon;
-            dbcommand.CommandText = "INSERT INTO [Message] (GroupID, FromID, MessageSubject, MessageBody, MessageDate) VALUES (@GroupID, @FromID, @MessageSubject, @MessageBody, @MessageDate)";
+            dbcommand.CommandText = "INSERT INTO [Message] (GroupID, FromID, MessageSubject, MessageBody, MessageDate) VALUES (@GroupID, @FromID, @MessageSubject, @MessageBody, @MessageDate); SELECT SCOPE_IDENTITY();"; // Insert message then select last inserted ID
             dbcommand.Parameters.AddWithValue("@GroupID", groupID);
             dbcommand.Parameters.AddWithValue("@FromID", fromID);
             dbcommand.Parameters.AddWithValue("@MessageSubject", messageSubject);
             dbcommand.Parameters.AddWithValue("@MessageBody", messageBody);
             dbcommand.Parameters.AddWithValue("@MessageDate", DateTime.Now);
 
+            UserQuery userQuery = new UserQuery();
+            List<User> usersInGroup = userQuery.GetUserByGroup(groupID);
+
             dbcon.Open();
-            dbcommand.ExecuteNonQuery();
+            var messageID = dbcommand.ExecuteScalar(); // Get messageID for insert to message read table while running the INSERT statement for the message table
+            foreach (User userInGroup in usersInGroup)
+            {
+                var messageReadSqlCommand = new SqlCommand();
+                messageReadSqlCommand.Connection = dbcon;
+                messageReadSqlCommand.CommandText = "INSERT INTO [MessageRead] (MessageID, ReaderID, MarkedAsRead) VALUES (@MessageID, @ReaderID, @MarkedAsRead)";
+                messageReadSqlCommand.Parameters.AddWithValue("@MessageID", messageID);
+                messageReadSqlCommand.Parameters.AddWithValue("@ReaderID", userQuery.GetUserEmailByUserID(userInGroup.UserID));
+                messageReadSqlCommand.Parameters.AddWithValue("@MarkedAsRead", false);
+                messageReadSqlCommand.ExecuteNonQuery(); // Insert into message read table (for determining whether message is unread by user)
+            }
             dbcon.Close();
         }
         
