@@ -277,6 +277,7 @@
     <Content Include="Views\Message\Inbox.cshtml" />
     <Content Include="Views\Message\New.cshtml" />
     <Content Include="Views\Message\Announcement.cshtml" />
+    <Content Include="Views\Message\ViewMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

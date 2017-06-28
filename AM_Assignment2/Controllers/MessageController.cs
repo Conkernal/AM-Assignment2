@@ -86,7 +86,7 @@ namespace AM_Assignment2.Controllers
             return View();
         }
 
-        // POST: /Message/ProcessNewMessage
+        // POST: /Message/ProcessAnnouncement
         [AcceptVerbs(HttpVerbs.Post)]
         [ValidateAntiForgeryToken]
         public ActionResult ProcessAnnouncement(SendAnnouncementViewModel model)
@@ -121,6 +121,25 @@ namespace AM_Assignment2.Controllers
             else
             {
                 return RedirectToAction("New", "Message");
+            }
+        }
+
+        // POST: /Message/ViewMessage
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult ViewMessage(MessageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewData["FromID"] = model.FromID;
+                ViewData["MessageSubject"] = model.MessageSubject;
+                ViewData["MessageDate"] = model.MessageDate;
+                ViewData["MessageBody"] = model.MessageBody;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Inbox", "Message");
             }
         }
     }

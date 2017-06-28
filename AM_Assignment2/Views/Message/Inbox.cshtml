@@ -15,11 +15,16 @@
 <h2>Inbox</h2>
 @foreach (Message message in inbox)
 {
-    <a href="#">
-        <li>@message.FromID</li>
-        <li>@message.MessageSubject</li>
-        <li>@message.MessageDate</li>
-        <li>@message.MessageBody</li>
-    </a>
+        <form action="ViewMessage" method="POST">
+            @Html.AntiForgeryToken()
+            <input type="hidden" value="@message.FromID" name="FromID" />
+            <input type="hidden" value="@message.MessageSubject" name="MessageSubject"/>
+            <input type="hidden" value="@message.MessageDate" name="MessageDate"/>
+            <input type="hidden" value="@message.MessageBody" name="MessageBody"/>
+            <button type="submit">
+                @message.FromID<br/>
+                @message.MessageSubject | @message.MessageDate <br/>
+            </button>
+        </form>
     <hr />
 }
