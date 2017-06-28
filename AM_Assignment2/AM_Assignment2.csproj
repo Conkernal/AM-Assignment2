@@ -272,6 +272,7 @@
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Message\Inbox.cshtml" />
     <Content Include="Views\Message\New.cshtml" />
+    <Content Include="Views\Message\Announcement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

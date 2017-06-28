@@ -10,6 +10,30 @@ namespace AM_Assignment2.Helpers
 {
     public class UserQuery
     {
+
+        // Checks if user exists in Identity database with a given e-mail. Returns true if record is found.
+        // * userEmail: the e-mail address assigned the user
+        public bool CheckIfUserExists(string userEmail)
+        {
+            var dbcon = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ToString());
+            var dbcommand = new SqlCommand();
+            dbcommand.Connection = dbcon;
+            dbcommand.CommandText = "SELECT COUNT(Email) FROM [AspNetUsers] WHERE Email = @UserEmail";
+            dbcommand.Parameters.AddWithValue("@UserEmail", userEmail);
+
+            dbcon.Open();
+            int userExists = (int)dbcommand.ExecuteScalar();
+            dbcon.Close();
+            if (userExists == 1) // User only exists if 1 record is found
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         /* Returns the UserIDs of users that are in a certain group
          * groupID: GroupID of Group in database
          */

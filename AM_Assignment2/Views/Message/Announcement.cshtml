@@ -1,0 +1,43 @@
+﻿@model AM_Assignment2.Models.SendAnnouncementViewModel
+@{
+    ViewBag.Title = "New";
+    AM_Assignment2.Helpers.GroupQuery groupQuery = new AM_Assignment2.Helpers.GroupQuery();
+    ViewData["GroupList"] = groupQuery.GetAllGroups(); 
+}
+
+<h2>New message</h2>
+@if (TempData["MessageFormError"] != null)
+{
+    foreach (string error in TempData["MessageFormError"] as List<string>)
+    {
+        <li>@error</li>
+    }
+}
+<form action="ProcessAnnouncement" method="POST">
+    @Html.AntiForgeryToken()
+    <label>
+        Group<br />
+        <select name="To">
+            @if (ViewData["GroupList"] != null)
+            {
+                foreach (var item in ViewData["GroupList"] as List<AM_Assignment2.Models.Group>)
+                {
+                    <option value="@item.GroupID">@item.GroupName</option>
+                }
+            }
+        </select>
+    </label>
+    <br />
+    <label>
+        Subject<br />
+        <input name="MessageSubject" type="text" placeholder="Add a subject" />
+    </label>
+    <br />
+    <label>
+        Message<br />
+        <textarea name="MessageBody" required></textarea>
+    </label>
+    <br />
+    <input type="submit" value="Send" />
+    <a href="Inbox">Discard</a>
+</form>

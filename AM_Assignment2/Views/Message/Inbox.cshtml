@@ -1,16 +1,25 @@
 ﻿@using AM_Assignment2.Models;
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Messages";
+    AM_Assignment2.Helpers.UserQuery userQuery = new AM_Assignment2.Helpers.UserQuery();
+    int groupID = userQuery.GetGroupByUserID(User.Identity.GetUserId());
     AM_Assignment2.Helpers.MessageQuery messageQuery = new AM_Assignment2.Helpers.MessageQuery();
-    List<Message> inbox = messageQuery.GetInbox(User.Identity.Name); // Get messages that were sent to the logged in user
+    List<Message> inbox = messageQuery.GetInbox(User.Identity.Name, groupID); // Get messages that were sent to the logged in user
 }
-<a href="New">New message</a>
-<h2>Inbox</h2>
-@foreach(Message message in inbox)
+<li><a href="New">New message</a></li>
+@if (User.IsInRole("Administrator") == true)
 {
-    <li>@message.FromID</li>
-    <li>@message.MessageSubject</li>
-    <li>@message.MessageDate</li>
-    <li>@message.MessageBody</li>
+    <li><a href="Announcement">New group message</a></li>
+}
+<h2>Inbox</h2>
+@foreach (Message message in inbox)
+{
+    <a href="#">
+        <li>@message.FromID</li>
+        <li>@message.MessageSubject</li>
+        <li>@message.MessageDate</li>
+        <li>@message.MessageBody</li>
+    </a>
     <hr />
 }

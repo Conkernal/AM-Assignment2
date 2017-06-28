@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AM_Assignment2.Models
 {
@@ -11,6 +7,16 @@ namespace AM_Assignment2.Models
         [EmailAddress]
         [Required]
         public string To { get; set; }
+
+        public string MessageSubject { get; set; }
+
+        public string MessageBody { get; set; }
+    }
+
+    public class SendAnnouncementViewModel
+    {
+        [Required]
+        public int To { get; set; }
 
         public string MessageSubject { get; set; }
 
