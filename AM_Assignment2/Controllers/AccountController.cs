@@ -201,7 +201,14 @@ namespace AM_Assignment2.Controllers
                         var application_user = new User { UserID = found_user.Id, UserInterface = "Light", UserCreationDate = DateTime.Today };
                         app_database.User.Add(application_user);
                     }
-
+                    if(string.IsNullOrEmpty(model.isInstructor) == false)
+                    {
+                        userManager.AddToRole(found_user.Id, "Instructor");
+                    }
+                    else
+                    {
+                        userManager.AddToRole(found_user.Id, "Learner");
+                    }
                     app_database.SaveChanges(); // COMMIT changes to database
                     app_database.Dispose();
 

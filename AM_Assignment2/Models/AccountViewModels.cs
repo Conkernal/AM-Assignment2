@@ -87,6 +87,8 @@ namespace AM_Assignment2.Models
         [Display(Name = "Group")]
         public int GroupID { get; set; }
 
+        public string isInstructor { get; set; }
+
     }
 
     public class GroupViewModel

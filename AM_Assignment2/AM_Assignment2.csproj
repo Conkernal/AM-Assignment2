@@ -280,6 +280,7 @@
     <Content Include="Views\Message\New.cshtml" />
     <Content Include="Views\Message\Announcement.cshtml" />
     <Content Include="Views\Message\ViewMessage.cshtml" />
+    <Content Include="Views\Statistics\ViewStats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

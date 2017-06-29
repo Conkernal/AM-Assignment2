@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+    AM_Assignment2.Helpers.UserQuery userQuery = new AM_Assignment2.Helpers.UserQuery();
+    List<AM_Assignment2.Models.User> userList = userQuery.GetAllUsers();
+}
+
+<h2>User statistics</h2>
+@foreach(AM_Assignment2.Models.User user in userList)
+{
+    <li>User e-mail: @userQuery.GetUserEmailByUserID(user.UserID)</li>
+    <li>Last access to course: @user.LastLoginTime</li>
+    <hr/>
+}

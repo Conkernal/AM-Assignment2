@@ -9,24 +9,21 @@
                     Administrator Settings
                 </h1>
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;" 
-                      a href="Account/ShowUsers">Show users</a></p>
+                @Html.ActionLink("Show users", "ShowUsers", "Account");
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;"
-                      a href="Account/Register">Create user</a></p>
+                @Html.ActionLink("Create user", "Register", "Account");
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;"
-                      a href="Group/Index">Group management</a></p>
+                @Html.ActionLink("Group management", "Index", "Group");
                 
 
             </div>
     }
-    else
+    if (HttpContext.Current.User.IsInRole("Instructor"))
     {
-        // Non-administrator view
+        <div class="row" style="align-items:center; padding-top:20px; align-self: center; background-color:#E3B628">
+
+            @Html.ActionLink("View stats", "ViewStats", "Statistics");
+        </div>
     }
 }
 
