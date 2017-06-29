@@ -25,7 +25,7 @@
         {
             <li>Last access: Never</li>
         }
-        <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID) <form action="ChangeGroup" method="post">@Html.AntiForgeryToken()<input type="hidden" name="userID" value="@item.UserID" /><input type="hidden" name="groupID" value="@item.GroupID" /><input type="submit" value="Change group"/></form>
+        <li>Group: @groupQuery.GetGroupNameByID(@item.GroupID) @if (@item.GroupID.ToString() != ""){ <form action="ChangeGroup" method="post">@Html.AntiForgeryToken()<input type="hidden" name="userID" value="@item.UserID" /><input type="hidden" name="groupID" value="@item.GroupID" /><input type="submit" value="Change group"/></form>}</li>
         <li>@Html.ActionLink("Delete user", "DeleteUser", new { userID = @item.UserID, confirmed = false })</li>
     </ul><hr />
 }
