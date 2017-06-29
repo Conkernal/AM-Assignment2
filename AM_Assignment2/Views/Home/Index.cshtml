@@ -9,24 +9,21 @@
                     Administrator Settings
                 </h1>
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;" 
-                      a href="Account/ShowUsers">Show users</a></p>
+                @Html.ActionLink("Show users", "ShowUsers", "Account");
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;"
-                      a href="Account/Register">Create user</a></p>
+                @Html.ActionLink("Create user", "Register", "Account");
 
-                <p style="float:left;margin-left:20px;"><a class="btn btn-lg" 
-                      style="color:antiquewhite; background-color:darkred;"
-                      a href="Group/Index">Group management</a></p>
+                @Html.ActionLink("Group management", "Index", "Group");
                 
 
             </div>
     }
-    else
+    if (HttpContext.Current.User.IsInRole("Instructor"))
     {
-        // Non-administrator view
+        <div class="row" style="align-items:center; padding-top:20px; align-self: center; background-color:#E3B628">
+
+            @Html.ActionLink("View stats", "ViewStats", "Statistics");
+        </div>
     }
 }
 
@@ -35,9 +32,9 @@
     <p class="lead" style="text-align:center; color:antiquewhite">Here, you will be able to learn the fundamentals of HTML5 </p>
 </div>
 
-<div class="jumbotron" style="text-align:center; background: linear-gradient(#B066FE, #63E2FF);margin-bottom:10px;">
-    <h1 style="color:antiquewhite">Your Learning Outcomes</h1>
-    <p class="lead" style="text-align:center;color:antiquewhite">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
+<div class="jumbotron" style="text-align:center; background: #FFF;margin-bottom:10px;">
+    <h1 style="color:#000">Your Learning Outcomes</h1>
+    <p class="lead" style="text-align:center;color:#000">To be able to understand HTML5 semantics, input attributes and Web Form Stuctures</p>
 </div>
 
 <div class="row" style="margin-bottom:5px">

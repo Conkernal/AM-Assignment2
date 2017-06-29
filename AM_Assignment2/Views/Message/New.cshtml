@@ -4,23 +4,27 @@
 }
 
 <h2>New message</h2>
+@if (TempData["MessageFormError"] != null) {
+    foreach(string error in TempData["MessageFormError"] as List<string>)
+    {
+        <li>@error</li>
+    }
+}
 <form action="ProcessNewMessage" method="POST">
     @Html.AntiForgeryToken()
     <label>
         To<br/>
-        <input name="To" type="email" />
+        <input name="To" type="email" required/>
     </label>
     <br />
     <label>
         Subject<br/>
-        <input name="MessageSubject" type="text" placeholder="Add a subject" />
+        <input name="MessageSubject" type="text" placeholder="Add a subject"/>
     </label>
     <br />
     <label>
         Message<br/>
-        <textarea name="MessageBody">
-
-        </textarea>
+        <textarea name="MessageBody" required></textarea>
     </label>
     <br />
     <input type="submit" value="Send" />

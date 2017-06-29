@@ -47,6 +47,7 @@
 		@Html.RadioButton("Answer6", "C") <span> BOTH of the above</span>
 		<br />
 		<br />
+        <input type="hidden" value="@User.Identity.Name" name="userEmail"/>
 		<input type="submit" value="Submit" />
 	}
 

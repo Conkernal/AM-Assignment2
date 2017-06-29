@@ -37,16 +37,109 @@ namespace AM_Assignment2.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> MessageFormErrorList = new List<string>();
                 ViewData["To"] = model.To;
                 ViewData["MessageSubject"] = model.MessageSubject;
                 ViewData["MessageBody"] = model.MessageBody;
                 MessageQuery messageQuery = new MessageQuery();
-                messageQuery.SendMessage(model.To, User.Identity.Name, model.MessageSubject, model.MessageBody);
-                return RedirectToAction("Inbox", "Message");
+
+                bool safe = true; // Initialize to true and set to false if error is found
+
+                if (string.IsNullOrEmpty(model.MessageBody) || string.IsNullOrWhiteSpace(model.MessageBody)) // Check if message body is empty
+                {
+                    MessageFormErrorList.Add("Message doesn't contain a message");
+                    safe = false;
+                }
+                if (string.IsNullOrEmpty(model.To))
+                {
+                    MessageFormErrorList.Add("Recipient e-mail address not set");
+                    safe = false;
+                }
+                UserQuery userQuery = new UserQuery();
+                if (userQuery.CheckIfUserExists(model.To) == false) // Check if recipient is a valid user
+                {
+                    MessageFormErrorList.Add("User with e-mail address " + model.To + " doesn't exist");
+                    safe = false;
+                }
+
+                if (safe == true) // If there are no errors, proceed with sending the message
+                {
+                    messageQuery.SendMessage(model.To, User.Identity.Name, model.MessageSubject, model.MessageBody);
+                    return RedirectToAction("Inbox", "Message");
+                }
+                else
+                {
+                    TempData["MessageFormError"] = MessageFormErrorList;
+                    return RedirectToAction("New", "Message");
+                }
             }
             else
             {
                 return RedirectToAction("New", "Message");
+            }
+        }
+
+
+        // GET: /Message/Announcement
+        public ActionResult Announcement()
+        {
+            return View();
+        }
+
+        // POST: /Message/ProcessAnnouncement
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProcessAnnouncement(SendAnnouncementViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                List<string> MessageFormErrorList = new List<string>();
+                ViewData["To"] = model.To;
+                ViewData["MessageSubject"] = model.MessageSubject;
+                ViewData["MessageBody"] = model.MessageBody;
+                MessageQuery messageQuery = new MessageQuery();
+
+                bool safe = true; // Initialize to true and set to false if error is found
+
+                if (string.IsNullOrEmpty(model.MessageBody) || string.IsNullOrWhiteSpace(model.MessageBody)) // Check if message body is empty
+                {
+                    MessageFormErrorList.Add("Message doesn't contain a message");
+                    safe = false;
+                }
+
+                if (safe == true) // If there are no errors, proceed with sending the message
+                {
+                    messageQuery.SendMessage(model.To, User.Identity.Name, model.MessageSubject, model.MessageBody);
+                    return RedirectToAction("Inbox", "Message");
+                }
+                else
+                {
+                    TempData["MessageFormError"] = MessageFormErrorList;
+                    return RedirectToAction("New", "Message");
+                }
+            }
+            else
+            {
+                return RedirectToAction("New", "Message");
+            }
+        }
+
+        // POST: /Message/ViewMessage
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateAntiForgeryToken]
+        public ActionResult ViewMessage(MessageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewData["FromID"] = model.FromID;
+                ViewData["MessageSubject"] = model.MessageSubject;
+                ViewData["MessageDate"] = model.MessageDate;
+                ViewData["MessageBody"] = model.MessageBody;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Inbox", "Message");
             }
         }
     }

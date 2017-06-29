@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace AM_Assignment2.Models
 {
@@ -13,6 +10,28 @@ namespace AM_Assignment2.Models
         public string To { get; set; }
 
         public string MessageSubject { get; set; }
+
+        public string MessageBody { get; set; }
+    }
+
+    public class SendAnnouncementViewModel
+    {
+        [Required]
+        public int To { get; set; }
+
+        public string MessageSubject { get; set; }
+
+        public string MessageBody { get; set; }
+    }
+
+    public class MessageViewModel
+    {
+        [Required]
+        public string FromID { get; set; }
+
+        public string MessageSubject { get; set; }
+
+        public DateTime MessageDate { get; set; }
 
         public string MessageBody { get; set; }
     }

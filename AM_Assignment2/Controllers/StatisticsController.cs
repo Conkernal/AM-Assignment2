@@ -13,5 +13,11 @@ namespace AM_Assignment2.Controllers
         {
             return View();
         }
+
+        // GET: Statistics/ViewStats
+        public ActionResult ViewStats()
+        {
+            return View();
+        }
     }
 }

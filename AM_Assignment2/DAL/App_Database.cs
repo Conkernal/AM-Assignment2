@@ -18,6 +18,8 @@ namespace AM_Assignment2.DAL
 
         public DbSet<Message> Message { get; set; }
 
+        public DbSet<MessageRead> MessageRead { get; set; }
+
         public DbSet<Statistics> Statistics { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
