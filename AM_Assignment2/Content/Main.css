@@ -1,0 +1,15 @@
+﻿body {
+    font: 16px "Segoe UI", Verdana, sans-serif;
+}
+.text-input {
+    background: #FFF;
+    width: 100%;
+    max-width: 350px;
+    height: 2em;
+    font-size: 1.3em;
+    font-family: Segoe Ui;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid darkgray;
+    border-radius: 1px;
+    padding: 0 0.5em;
+}
