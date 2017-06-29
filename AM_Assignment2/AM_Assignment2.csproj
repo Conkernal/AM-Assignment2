@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Helpers\GroupQuery.cs" />
     <Compile Include="Helpers\MessageQuery.cs" />
+    <Compile Include="Helpers\StatisticsQuery.cs" />
     <Compile Include="Helpers\UserQuery.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Group.cs" />
@@ -203,6 +204,7 @@
     <Content Include="Content\Images\checkmark.png" />
     <Content Include="Content\Images\HTML5logo.png" />
     <Content Include="Content\Images\x mark.png" />
+    <Content Include="Content\Main.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

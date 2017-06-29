@@ -115,6 +115,13 @@ namespace AM_Assignment2.Helpers
             return foundUser.Email;
         }
 
+        public string GetUserIDByUserEmail(string userEmail)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            ApplicationUser foundUser = userManager.FindByEmail(userEmail);
+            return foundUser.Id;
+        }
+
         // Get Role by UserID
         public IList<string> GetRoleByUserID(string userID)
         {
